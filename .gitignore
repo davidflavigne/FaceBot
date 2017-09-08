@@ -3,3 +3,4 @@ __pycache__
 references.txt
 todo.txt
 sonar-scan.log
+ghostdriver.log
