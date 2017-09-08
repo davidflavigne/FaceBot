@@ -11,9 +11,10 @@ from FaceBot import FaceBot
 
 bot = FaceBot()
 
+login = input('Username: ')
 password = getpass.getpass()
 
-bot.login('rougailsaucix',password)
+bot.login(login,password)
 
 notifs = bot.get_notifications()
 
