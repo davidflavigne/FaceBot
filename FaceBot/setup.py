@@ -15,7 +15,7 @@ setup(
     long_description=long_description,
     url = '',
     author='David Flavigné',
-    author_email='david.flavigne@coding-academy.fr',
+    author_email='',
     license='MIT',
     classifiers=[
         # How mature is this project? Common values are
