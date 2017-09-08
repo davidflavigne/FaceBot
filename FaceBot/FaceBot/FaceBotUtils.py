@@ -38,5 +38,3 @@ class Router:
         else:
             print('Bad command name: type "list" to get full commands list')
             return False
-    
-    pass
