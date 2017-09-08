@@ -1,7 +1,13 @@
 #!/usr/bin/python3.5
 
-from FaceBot import FaceBot
+import sys
+import os 
 import getpass
+
+dir_path = os.path.dirname(os.path.realpath(__file__))
+sys.path.insert(0, dir_path+'/../FaceBot/')
+
+from FaceBot import FaceBot
 
 #from selenium import webdriver
 
@@ -14,15 +20,12 @@ password = getpass.getpass()
 
 bot.login('rougailsaucix',password)
 
-# print ('Friend id:' + bot.get_friend('Céliane'))
-# bot.message('Céliane','Coucou')
-
 # bot.get_header_link('notifications')
 notifs = bot.get_notifications()
 
 if not notifs is False:
-for notif in notifs:
-    print(notif)
+    for notif in notifs:
+        print(notif)
 
 bot.logout()
 

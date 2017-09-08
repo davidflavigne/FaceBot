@@ -19,8 +19,6 @@ class Router:
                 print('Usage : message <friendname> <message body>')
                 return False
             return bot.message(args[1],args[2])
-            #print (args)
-            return True
         elif args[0] == 'notifications':
             notifs = bot.get_notifications()
             if not notifs is False:

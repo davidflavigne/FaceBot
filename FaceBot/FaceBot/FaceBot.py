@@ -145,7 +145,7 @@ class FaceBot(webdriver.PhantomJS):
         notif_link.send_keys(Keys.ENTER)
         try:
             notifs_list = self.find_element_by_id('notifications_list')
-            notifs_all = self.find_elements_by_tag_name('a')
+            notifs_all = notifs_list.find_elements_by_tag_name('a')
             notifs = []
             for notif in notifs_all:
                 try:
