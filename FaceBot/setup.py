@@ -32,7 +32,7 @@ setup(
         'Programming Language :: Python :: 3.5'
     ],
     keywords='sample facebook bot development',
-    packages= find_packages(include=['FaceBot','FaceBotUtils'],exclude=["*.tests", "*.tests.*", "tests.*", "tests"]),
+    packages= find_packages(include=['FaceBot','FaceBotUtils','encodings'],exclude=["*.tests", "*.tests.*", "tests.*", "tests"]),
     python_requires='>=3',
     entry_points={
         'console_scripts': [

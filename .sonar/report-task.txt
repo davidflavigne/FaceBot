@@ -2,5 +2,5 @@ projectKey=Python_d03
 serverUrl=http://localhost:9000
 serverVersion=6.5.0.27846
 dashboardUrl=http://localhost:9000/dashboard/index/Python_d03
-ceTaskId=AV5m2OW8w0VYSm04q7sF
-ceTaskUrl=http://localhost:9000/api/ce/task?id=AV5m2OW8w0VYSm04q7sF
+ceTaskId=AV5nE0Luw0VYSm04q7sH
+ceTaskUrl=http://localhost:9000/api/ce/task?id=AV5nE0Luw0VYSm04q7sH

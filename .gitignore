@@ -2,6 +2,7 @@
 __pycache__
 references.txt
 todo.txt
+memo.txt
 sonar-scan.log
 ghostdriver.log
 *.egg-info
