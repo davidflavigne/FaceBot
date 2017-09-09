@@ -1,6 +1,12 @@
-*.pyc
+*.py[cod]
 __pycache__
 references.txt
 todo.txt
 sonar-scan.log
 ghostdriver.log
+*.egg-info
+dist/
+build/
+*.so
+*~
+.cache
