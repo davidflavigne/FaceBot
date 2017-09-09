@@ -8,12 +8,13 @@
 
 """
 
+import FaceBot.FaceBotUtils
+import FaceBot.FaceBot
 import FaceBot
-import FaceBotUtils
 import getpass
 
 if __name__ == "__main__":
-    bot = FaceBot.FaceBot()
+    bot = FaceBot.FaceBot.FaceBot()
     continuer = True
     logged = False
     while(not logged):
@@ -26,7 +27,7 @@ if __name__ == "__main__":
         if command == 'stop':
             continuer = False
         else:
-            res = FaceBotUtils.Router.route(bot,command)
+            res = FaceBot.FaceBotUtils.Router.route(bot,command)
             if res :
                 print (command + ' done')
             else :

@@ -14,7 +14,7 @@ class Router:
         """
         args = shlex.split(command)
         if args[0] == 'message':
-            return Router.message(args[1],args[2])
+            return Router.messager(bot,args)
         elif args[0] == 'notifications':
             return Router.notifications(bot)
         elif args[0] == 'list' or args[0] == 'help':
@@ -24,11 +24,11 @@ class Router:
             return False
         
     @staticmethod
-    def messager(friend, message):
+    def messager(bot,args):
         if len(args) < 3:
             print('Usage : message <friendname> <message body>')
             return False
-        return bot.message(friend,message)
+        return bot.message(args[1],args[2])
         
     @staticmethod
     def usage():

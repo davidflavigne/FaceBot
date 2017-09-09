@@ -1,21 +1,22 @@
+#!/usr/bin/python3.5
 # Always prefer setuptools over distutils
 from setuptools import setup, find_packages
 # To use a consistent encoding
 from os import path
+import sys
+from cx_Freeze import setup, Executable
 
-
-# Get the long description from the README file
-with open(path.join(here, 'README.rst'), encoding='utf-8') as f:
-    long_description = f.read()
-
+base = None
+if sys.platform == "win32":
+    base = "Win32GUI"
+    
 setup(
     name='facebot',
     version='0.1.0',
     description='A Python Bot to connect to facebook',
-    long_description=long_description,
-    url = '',
     author='David Flavigné',
-    author_email='',
+    author_email='david.flavigne@coding-academy.fr',
+    url = 'https://github.com/davidflavigne/FaceBot',
     license='MIT',
     classifiers=[
         # How mature is this project? Common values are
@@ -31,11 +32,12 @@ setup(
         'Programming Language :: Python :: 3.5'
     ],
     keywords='sample facebook bot development',
-    packages='FaceBot',
+    packages= find_packages(include=['FaceBot','FaceBotUtils'],exclude=["*.tests", "*.tests.*", "tests.*", "tests"]),
     python_requires='>=3',
     entry_points={
         'console_scripts': [
-            'FaceBot=FaceBot:main',
+            'FaceBot=FaceBot:facebot',
         ],
     },
+    executables = [Executable("facebot.py", base=base)]
 )
