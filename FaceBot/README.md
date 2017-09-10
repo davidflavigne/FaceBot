@@ -8,3 +8,5 @@ during the Coding Academy formation.
 FaceBot allows you to connect to your facebook account and do several actions on it:
 + Get notifications
 + Send a message to a friend
++ Get list of friends
++ Send several messages in a row to the last conversation
