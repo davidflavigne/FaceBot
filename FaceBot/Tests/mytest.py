@@ -17,11 +17,12 @@ password = getpass.getpass()
 bot.login(login,password)
 
 notifs = bot.get_notifications()
-
 if not notifs is False:
     for notif in notifs:
         print(notif)
 
+friends = bot.get_friend_list()
+        
 bot.logout()
 
 bot.stop_phantom()

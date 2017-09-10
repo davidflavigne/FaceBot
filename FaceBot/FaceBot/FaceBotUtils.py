@@ -17,6 +17,8 @@ class Router:
             return Router.messager(bot,args)
         elif args[0] == 'notifications':
             return Router.notifications(bot)
+        elif args[0] == 'friends':
+            return Router.friends(bot)
         elif args[0] == 'list' or args[0] == 'help':
             return Router.usage()
         else:
@@ -24,7 +26,14 @@ class Router:
             return False
         
     @staticmethod
+    def friends(bot):
+        return bot.get_friend_list();
+        
+    @staticmethod
     def messager(bot,args):
+        """
+        Checks arguments and call the bot method to send a private message to the named friend (if existing)
+        """
         if len(args) < 3:
             print('Usage : message <friendname> <message body>')
             return False
@@ -32,15 +41,22 @@ class Router:
         
     @staticmethod
     def usage():
+        """
+        Prints list of available commands
+        """
         print('Commands list:')
         print('    notifications: print last notifications')
         print('    message: send a message to a friend')
+        print('    friends: display a list of your friends')
         print('    list: print this list')
         print('    stop: stop the bot and logout')
         return True
     
     @staticmethod
     def notifications(bot):
+        """
+        Calls the bot method to retrieve notifications and displays them, if any
+        """
         notifs = bot.get_notifications()
         if not notifs is False:
             for notif in notifs:

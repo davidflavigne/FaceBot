@@ -10,7 +10,7 @@ class FaceBot(webdriver.PhantomJS):
     """ 
            FaceBot class : instance for a facebot, provides
            functions to access facebook accounts, such as login, 
-           logout...
+           logout, get notifications, friend list, 
            Inherits from webdriver.PhantomJS class
 
     """
@@ -29,6 +29,40 @@ class FaceBot(webdriver.PhantomJS):
         """
         super(FaceBot, self).get(url)
 
+
+    def find_link_by_href(self,pattern):
+        """
+        Finds the first link on the current page with the href attribute containing 
+        given pattern. Return the corresponding link element, or false in none
+        were found
+        """
+        try:
+            links = self.find_elements_by_tag_name('a')
+            for link in links:
+                if pattern in link.get_attribute('href'):
+                    return link
+        except:
+            pass
+        return False
+
+    def find_links_by_href(self,pattern):
+        """
+        Finds the links on the current page with the href attribute containing 
+        given pattern. Return the corresponding link element, or false in none
+        were found
+        """
+        try:
+            links = self.find_elements_by_tag_name('a')
+            result = []
+            for link in links:
+                if pattern in link.get_attribute('href'):
+                    result.append(link)
+            if len(result)>0:
+                return result
+        except:
+            pass
+        return False
+        
     def login(self,email,password):
         """ 
            login method. Allows to login to a facebook account
@@ -73,7 +107,38 @@ class FaceBot(webdriver.PhantomJS):
         except:
             print("Failed to logout")
             return False
-        
+
+    def get_friend_list(self):
+        """
+        Prints list of all facebook friends
+        """
+        url = "https://mbasic.facebook.com/friends/center/friends/?fb_ref=fbm&ref_component=mbasic_bookmark&ref_page=XMenuController"
+        self.get(url)
+        friend_list = []
+        next_link = True
+        while(next_link != False):
+            friend_list_new = self.find_links_by_href('/friends/hovercard/mbasic/?uid=')
+            for friend in friend_list_new:
+                friend_list.append(friend.text)
+            next_link = self.find_link_by_href('/friends/center/friends/?ppk')
+            if '#header' in next_link.get_attribute('href'):
+                next_link = False
+            #print (friend_list)
+            if(next_link != False):
+                #print (next_link.get_attribute('href'))
+                next_link.send_keys(Keys.ENTER)
+            #else:
+                #print('end of friends!')
+        print ('Your friend list: ')
+        print (friend_list)
+        if (len(friend_list) > 0):
+            return True
+        else:
+            return False
+
+    def chat_with(self.name):
+        pass
+    
     def get_friend(self,name):
         """ 
            get_friend method. queries a facebook account for the given name, 
