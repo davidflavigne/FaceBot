@@ -16,13 +16,19 @@ password = getpass.getpass()
 
 bot.login(login,password)
 
-notifs = bot.get_notifications()
-if not notifs is False:
-    for notif in notifs:
-        print(notif)
+# notifs = bot.get_notifications()
+# if not notifs is False:
+#     for notif in notifs:
+#         print(notif)
 
-friends = bot.get_friend_list()
-        
+#friends = bot.get_friend_list()
+
+success = bot.chat_last('Fais-moi à manger!')
+if success:
+    print("success")
+else:
+    print("failure")
+
 bot.logout()
 
 bot.stop_phantom()

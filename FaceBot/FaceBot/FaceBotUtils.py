@@ -17,6 +17,8 @@ class Router:
             return Router.messager(bot,args)
         elif args[0] == 'notifications':
             return Router.notifications(bot)
+        elif args[0] == 'discuter':
+            return Router.discuter(bot,args)
         elif args[0] == 'friends':
             return Router.friends(bot)
         elif args[0] == 'list' or args[0] == 'help':
@@ -24,7 +26,16 @@ class Router:
         else:
             print('Bad command name: type "list" to get full commands list')
             return False
-        
+
+    @staticmethod
+    def discuter(bot,args):
+        """
+        Sends given message 3 times to the last conversation in your message page
+        """
+        if len(args) < 2:
+            print('Usage : discuter <message>')
+            return False
+        return bot.chat_last(args[1])
     @staticmethod
     def friends(bot):
         return bot.get_friend_list();
@@ -47,6 +58,7 @@ class Router:
         print('Commands list:')
         print('    notifications: print last notifications')
         print('    message: send a message to a friend')
+        print('    discuter: spam a message to the last friend you had a conversation with')
         print('    friends: display a list of your friends')
         print('    list: print this list')
         print('    stop: stop the bot and logout')

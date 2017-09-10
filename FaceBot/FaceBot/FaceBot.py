@@ -5,6 +5,7 @@
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from selenium.common.exceptions import NoSuchElementException
+import time
 
 class FaceBot(webdriver.PhantomJS):
     """ 
@@ -112,8 +113,7 @@ class FaceBot(webdriver.PhantomJS):
         """
         Prints list of all facebook friends
         """
-        url = "https://mbasic.facebook.com/friends/center/friends/?fb_ref=fbm&ref_component=mbasic_bookmark&ref_page=XMenuController"
-        self.get(url)
+        self.get("https://mbasic.facebook.com/friends/center/friends/?fb_ref=fbm&ref_component=mbasic_bookmark&ref_page=XMenuController")
         friend_list = []
         next_link = True
         while(next_link != False):
@@ -123,18 +123,13 @@ class FaceBot(webdriver.PhantomJS):
             next_link = self.find_link_by_href('/friends/center/friends/?ppk')
             if '#header' in next_link.get_attribute('href'):
                 next_link = False
-            #print (friend_list)
             if(next_link != False):
-                #print (next_link.get_attribute('href'))
                 next_link.send_keys(Keys.ENTER)
-            #else:
-                #print('end of friends!')
         print ('Your friend list: ')
         print (friend_list)
         if (len(friend_list) > 0):
             return True
-        else:
-            return False
+        return False
         
     def get_friend(self,name):
         """ 
@@ -220,6 +215,45 @@ class FaceBot(webdriver.PhantomJS):
         except:
             print('Could not get notifications list')
             return False
+
+    def loop_spam_message(self,message):
+        """
+        Sends the message given in argument 3 times, with
+        interval of 10 seconds
+        """
+        try:
+            i=0
+            while(i<3):
+                time.sleep(10)
+                form = self.find_element_by_id('composer_form')
+                textarea = form.find_element_by_id('composerInput')
+                send_button = form.find_element_by_name('send')
+                textarea.send_keys(message)
+                send_button.send_keys(Keys.ENTER)
+                i = i+1
+            return True
+        except:
+            self.save_screenshot('compose_failed.png')
+            return False
+
+    def chat_last(self,message):
+        """
+        Goes to message page and then calls loop_spam_message method
+        passing the message in argument
+        """
+        messages_link = self.get_header_link('messages')
+        if messages_link == False:
+            return False
+        messages_link.send_keys(Keys.ENTER)
+        try:
+            last_message = self.find_link_by_href('/messages/read/?tid=mid')
+            last_message.send_keys(Keys.ENTER)
+            return self.loop_spam_message(message)
+            
+        except:
+            return False
+        return True
+            
     def stop_phantom(self):
         """ 
             stops the phantom instance. Otherwise the process is still 
