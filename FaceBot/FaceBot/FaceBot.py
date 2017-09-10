@@ -135,10 +135,7 @@ class FaceBot(webdriver.PhantomJS):
             return True
         else:
             return False
-
-    def chat_with(self.name):
-        pass
-    
+        
     def get_friend(self,name):
         """ 
            get_friend method. queries a facebook account for the given name, 
